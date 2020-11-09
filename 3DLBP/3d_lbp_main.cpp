@@ -7,8 +7,15 @@
 #include <Open3D/Open3D.h>
 
 #define TEST_PATH "/home/file_collections/gitlab/3D-LBP/face_mesh_vertexcolour.obj"
+#define SELECTED_FACE_INDEX 100
+#define INIT_RING_NUMBER 3
+#define FACET_NUMBER 12
 
 using namespace open3d;
+
+std::vector<Eigen::Vector3i> bridge(const std::vector<Eigen::Vector3i>& mesh_array, ){
+
+}
 
 int main(int argc, char** argv){
     std::shared_ptr<geometry::TriangleMesh> tmp_mesh_read_ptr_i = std::make_shared<geometry::TriangleMesh>();
@@ -21,11 +28,24 @@ int main(int argc, char** argv){
 
     auto mesh_array = (* tmp_mesh_read_ptr_i).triangles_;
     auto pc_array = (* tmp_mesh_read_ptr_i).vertices_;
-    for (int i = 0; i < mesh_array.size(); ++i){
-        if (){
+
+    auto selected_face = mesh_array[SELECTED_FACE_INDEX];
+
+    std::cout << selected_face << std::endl;
+
+    int ring_number_cnt = INIT_RING_NUMBER;
+    while (ring_number_cnt > 0){
+        for(int i = 0; i < mesh_array.size(); ++i){
 
         }
+        ring_number_cnt--;
     }
+
+//    for (int i = 0; i < mesh_array.size(); ++i){
+//        if (){
+//
+//        }
+//    }
 
     return 0;
 }
