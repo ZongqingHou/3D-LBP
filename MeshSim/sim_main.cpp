@@ -7,9 +7,7 @@
 #include <Open3D/Open3D.h>
 
 #define TEST_PATH "/home/file_collections/gitlab/3D-LBP/face_mesh_vertexcolour.obj"
-#define SELECTED_FACE_INDEX 100
-#define INIT_RING_NUMBER 3
-#define FACET_NUMBER 12
+#define TARGET_SIZE 1024
 
 using namespace open3d;
 
@@ -25,9 +23,6 @@ int main(int argc, char** argv){
     auto mesh_array = (* tmp_mesh_read_ptr_i).triangles_;
     auto pc_array = (* tmp_mesh_read_ptr_i).vertices_;
 
-    auto selected_face = mesh_array[SELECTED_FACE_INDEX];
-
-    std::cout << selected_face << std::endl;
     if((* tmp_mesh_read_ptr_i).HasAdjacencyList()){
 
     }else{
@@ -39,15 +34,20 @@ int main(int argc, char** argv){
 
         for (int i = 0; i < mesh_array.size(); ++i) {
             Eigen::Vector3i tmp_face = mesh_array[i];
-            for(int j = 0; j < tmp_face.size(); ++j){
-                tmp_adjacency_list[tmp_face[j]].insert(tmp_face[(j + 1) % 3]);
-                tmp_adjacency_list[tmp_face[j]].insert(tmp_face[(j + 2) % 3]);
+            int tmp_face_size = tmp_face.size();
+            for(int j = 0; j < tmp_face_size; ++j){
+                tmp_adjacency_list[tmp_face[j]].insert(tmp_face[(j + 1) % tmp_face_size]);
+                tmp_adjacency_list[tmp_face[j]].insert(tmp_face[(j + 2) % tmp_face_size]);
             }
         }
 
 //        (* tmp_mesh_read_ptr_i).adjacency_list_ = tmp_adjacency_list;
         auto tmp = (* tmp_mesh_read_ptr_i).ComputeAdjacencyList().adjacency_list_;
         std::cout << "Pause" << std::endl;
+    }
+    int pc_size = pc_array.size();
+    while(pc_size >= TARGET_SIZE){
+
     }
 
 //    while (ring_number_cnt > 0){

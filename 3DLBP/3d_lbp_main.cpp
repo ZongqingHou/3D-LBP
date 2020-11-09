@@ -13,9 +13,9 @@
 
 using namespace open3d;
 
-std::vector<Eigen::Vector3i> bridge(const std::vector<Eigen::Vector3i>& mesh_array, ){
-
-}
+//std::vector<Eigen::Vector3i> bridge(const std::vector<Eigen::Vector3i>& mesh_array, ){
+//
+//}
 
 int main(int argc, char** argv){
     std::shared_ptr<geometry::TriangleMesh> tmp_mesh_read_ptr_i = std::make_shared<geometry::TriangleMesh>();
